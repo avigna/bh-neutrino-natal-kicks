@@ -36,29 +36,31 @@ end
 % VFTS 243
 % Shenar et al. (2022a)
 % https://ui.adsabs.harvard.edu/abs/2022NatAs...6.1085S/abstract
+VFTS243_mass_primary                        = 25;
+VFTS243_mass_primary_errors                 = 2.3;
 VFTS243_mass_primary_spectroscopic          = 27;
 VFTS243_mass_primary_spectroscopic_errors   = 4;
 VFTS243_mass_primary_BONNSAI                = 26;
 VFTS243_mass_primary_BONNSAI_error_plus     = 2;
 VFTS243_mass_primary_BONNSAI_error_minus    = 2;
-VFTS243_mass_secondary_minimum              = 9.1;
-VFTS243_mass_secondary_minimum_error_plus   = 1.0;
-VFTS243_mass_secondary_minimum_error_minus  = 1.0;
+VFTS243_mass_secondary                      = 10.1;
+VFTS243_mass_secondary_error_plus           = 2.0;
+VFTS243_mass_secondary_error_minus          = 2.0;
 VFTS243_eccentricity                        = 0.017;
 VFTS243_eccentricity_error_plus             = 0.012;
 VFTS243_eccentricity_error_minus            = 0.012;
 
 VFTS243_orbital_period_days        = 10.4031;
 VFTS243_radius                     = 10.3;
-VFTS243_effective_roche_radius     = calculateRocheRadius(VFTS243_mass_primary_spectroscopic,VFTS243_mass_secondary_minimum);
-VFTS243_separation_Rsol            = calculate_separation_solar_radii_Kepler(VFTS243_mass_primary_spectroscopic,VFTS243_mass_secondary_minimum,VFTS243_orbital_period_days);
+VFTS243_effective_roche_radius     = calculateRocheRadius(VFTS243_mass_primary,VFTS243_mass_secondary);
+VFTS243_separation_Rsol            = calculate_separation_solar_radii_Kepler(VFTS243_mass_primary,VFTS243_mass_secondary,VFTS243_orbital_period_days);
 VFTS243_roche_radius               = VFTS243_effective_roche_radius.*VFTS243_separation_Rsol;
 VFTS243_roche_factor               = VFTS243_radius/VFTS243_roche_radius;
 % 0.33
 
 if debug_flag
     display('VFTS 243')
-    VFTS243_mass_secondary_minimum+VFTS243_mass_primary_spectroscopic
+    VFTS243_mass_secondary+VFTS243_mass_primary
     VFTS243_eccentricity
     VFTS243_roche_factor
 end
@@ -329,7 +331,7 @@ MASS_black_hole_mass_error_plus               = 2.8;
 MASS_black_hole_mass_error_minus              = 0.7;
 
 MASS_orbital_period_days        = 83.205; % ± 0.064
-MASS_radius                     = 30.0;
+MASS_radius                     = 20.0;
 MASS_effective_roche_radius     = calculateRocheRadius(MASS_mass_primary,MASS_black_hole_mass);
 MASS_separation_Rsol            = calculate_separation_solar_radii_Kepler(MASS_mass_primary,MASS_black_hole_mass,MASS_orbital_period_days);
 MASS_roche_radius               = MASS_effective_roche_radius.*MASS_separation_Rsol;
@@ -348,14 +350,14 @@ end
 % NGC1850_BH1_mass_primary                             = ;
 % NGC1850_BH1_mass_primary_error_plus                  = ;
 % NGC1850_BH1_mass_primary_error_minus                 = ;
-% NGC1850_BH1_eccentricity                             = ;
-% NGC1850_BH1_eccentricity_error_plus                  = ;
-% NGC1850_BH1_eccentricity_error_minus                 = ;
-% NGC1850_BH1_black_hole_mass                          = ;
+% NGC1850_BH1_eccentricity                             = 0.029;
+% NGC1850_BH1_eccentricity_error_plus                  = 0.010;
+% NGC1850_BH1_eccentricity_error_minus                 = 0.014;
+% NGC1850_BH1_black_hole_mass                          = 3.0;
 % NGC1850_BH1_black_hole_mass_error_plus               = ;
 % NGC1850_BH1_black_hole_mass_error_minus              = ;
 % 
-% NGC1850_BH1_orbital_period_days        = ;
+% NGC1850_BH1_orbital_period_days        = 5.0402; % ± 0.0004
 % NGC1850_BH1_radius                     = ;
 % NGC1850_BH1_effective_roche_radius     = calculateRocheRadius(NGC1850_BH1_mass_primary,NGC1850_BH1_black_hole_mass);
 % NGC1850_BH1_separation_Rsol            = calculate_separation_solar_radii_Kepler(NGC1850_BH1_mass_primary,NGC1850_BH1_black_hole_mass,NGC1850_BH1_orbital_period_days);
@@ -370,14 +372,12 @@ end
 % end
 
 % PLOT
-sz=100;
-fs=16;
+sz=125;
 sz2=10;
+szVFTS243=450;
+fs=16;
 fs2=13;
-lw=1.0;
 grey = 0.5.*[1 1 1];
-blue1 = [0    0.4470    0.7410];
-gaiagreen = [0.4660    0.6740    0.1880];
 % errorbar(x,y,yneg,ypos,xneg,xpos,'o')
 
 clf
@@ -396,10 +396,10 @@ h=text(14.25,14.25,'$M_{*}=M_{\rm{BH}}$','Interpreter','latex','FontName','Helve
 set(h,'Rotation',20);
 
 plot(100,100,'o','MarkerSize',sz2,'Color','k')
-plot(100,100,'^','MarkerSize',sz2,'Color','k')
-plot(100,100,'hexagram','MarkerSize',sz2,'Color','k')
-plot(100,100,'s','MarkerSize',sz2,'Color','k')
-legend( 'HMXB','SB1','Astrometry','Photometry',...
+plot(100,100,'>','MarkerSize',sz2,'Color','k')
+% plot(100,100,'hexagram','MarkerSize',sz2,'Color','k')
+% plot(100,100,'s','MarkerSize',sz2,'Color','k')
+legend( 'HMXB','Inert BHB',...
         'FontSize',fs,...
         'Location','SouthEast',...
         'Box','off',...
@@ -416,13 +416,13 @@ errorbar(   HD130298_mass_secondary_minimum,...
 text(7.5,19,'HD130298',FontSize=fs2);
 
 % VFTS243
-errorbar(   VFTS243_mass_secondary_minimum,...
-            VFTS243_mass_primary_spectroscopic,...
-            VFTS243_mass_primary_spectroscopic_errors,...
-            VFTS243_mass_primary_spectroscopic_errors,...
-            VFTS243_mass_secondary_minimum_error_minus,...
-            VFTS243_mass_secondary_minimum_error_plus,'k','HandleVisibility','off')
-text(10,24,'VFTS 243',FontSize=fs2);
+errorbar(   VFTS243_mass_secondary,...
+            VFTS243_mass_primary,...
+            VFTS243_mass_primary_errors,...
+            VFTS243_mass_primary_errors,...
+            VFTS243_mass_secondary_error_minus,...
+            VFTS243_mass_secondary_error_plus,'k','HandleVisibility','off')
+text(12.5,25,'VFTS 243',FontSize=fs2);
 
 % VFTS514
 errorbar(   VFTS514_mass_secondary_minimum,...
@@ -523,19 +523,19 @@ choice = menu(msg,opts);
 
 if choice == 1
     % Eccentricity
-    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_eccentricity,'^','filled','HandleVisibility','off')
-    scatter(VFTS243_mass_secondary_minimum,VFTS243_mass_primary_spectroscopic,5*sz,VFTS243_eccentricity,'^','filled','HandleVisibility','off')
-    scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,VFTS514_eccentricity,'^','filled','HandleVisibility','off')
-    scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,VFTS779_eccentricity,'^','filled','HandleVisibility','off')
+    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_eccentricity,'>','filled','HandleVisibility','off')
+    scatter(VFTS243_mass_secondary,VFTS243_mass_primary,szVFTS243,VFTS243_eccentricity,'>','filled','HandleVisibility','off')
+    scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,VFTS514_eccentricity,'>','filled','HandleVisibility','off')
+    scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,VFTS779_eccentricity,'>','filled','HandleVisibility','off')
     scatter(CygnusX1_black_hole_mass_median,CygnusX1_mass_primary_median,sz,CygnusX1_eccentricity_median,'o','filled','HandleVisibility','off')
     scatter(M33_X_7_black_hole_mass,M33_X_7_mass_primary_spectroscopic,sz,M33_X_7_eccentricity,'o','filled','HandleVisibility','off')
     scatter(HD96670_black_hole_mass,HD96670_mass_primary_spectroscopic,sz,HD96670_eccentricity,'o','filled','HandleVisibility','off')
     scatter(LMC_X_1_black_hole_mass,LMC_X_1_mass_primary,sz,LMC_X_1_eccentricity,'o','filled','HandleVisibility','off')
     scatter(SS_433_black_hole_mass,SS_433_mass_primary,sz,SS_433_eccentricity,'o','filled','HandleVisibility','off')
-    scatter(Gaia_BH1_black_hole_mass,Gaia_BH1_mass_primary,sz,Gaia_BH1_eccentricity,'hexagram','filled','HandleVisibility','off')
-    scatter(Gaia_BH2_black_hole_mass,Gaia_BH2_mass_primary,sz,Gaia_BH2_eccentricity,'hexagram','filled','HandleVisibility','off')
-    scatter(MASS_black_hole_mass,MASS_mass_primary,sz,MASS_eccentricity,'s','filled','HandleVisibility','off')
-    
+    scatter(Gaia_BH1_black_hole_mass,Gaia_BH1_mass_primary,sz,Gaia_BH1_eccentricity,'>','filled','HandleVisibility','off')
+    scatter(Gaia_BH2_black_hole_mass,Gaia_BH2_mass_primary,sz,Gaia_BH2_eccentricity,'>','filled','HandleVisibility','off')
+    scatter(MASS_black_hole_mass,MASS_mass_primary,sz,MASS_eccentricity,'>','filled','HandleVisibility','off')
+
     % Colorbar
     cbar=colorbar;
     cbar.Label.String='$e$';
@@ -553,18 +553,18 @@ if choice == 1
 
 elseif choice==2
     % Roche-filling factor
-    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_roche_factor,'^','filled','HandleVisibility','off')
-    scatter(VFTS243_mass_secondary_minimum,VFTS243_mass_primary_spectroscopic,5*sz,VFTS243_roche_factor,'^','filled','HandleVisibility','off')
-    scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,grey,'^','filled','HandleVisibility','off')
-    scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,grey,'^','filled','HandleVisibility','off')
+    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_roche_factor,'>','filled','HandleVisibility','off')
+    scatter(VFTS243_mass_secondary,VFTS243_mass_primary,szVFTS243,VFTS243_roche_factor,'>','filled','HandleVisibility','off')
+    scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,grey,'>','filled','HandleVisibility','off')
+    scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,grey,'>','filled','HandleVisibility','off')
     scatter(CygnusX1_black_hole_mass_median,CygnusX1_mass_primary_median,sz,CygnusX1_roche_factor,'o','filled','HandleVisibility','off')
     scatter(M33_X_7_black_hole_mass,M33_X_7_mass_primary_spectroscopic,sz,M33_X_7_roche_factor,'o','filled','HandleVisibility','off')
     scatter(HD96670_black_hole_mass,HD96670_mass_primary_spectroscopic,sz,HD96670_roche_factor,'o','filled','HandleVisibility','off')
     scatter(LMC_X_1_black_hole_mass,LMC_X_1_mass_primary,sz,LMC_X_1_roche_factor,'o','filled','HandleVisibility','off')
     scatter(SS_433_black_hole_mass,SS_433_mass_primary,sz,SS_433_roche_factor,'o','filled','HandleVisibility','off')
-    scatter(Gaia_BH1_black_hole_mass,Gaia_BH1_mass_primary,sz,Gaia_BH1_roche_factor,'hexagram','filled','HandleVisibility','off')
-    scatter(Gaia_BH2_black_hole_mass,Gaia_BH2_mass_primary,sz,Gaia_BH2_roche_factor,'hexagram','filled','HandleVisibility','off')
-    scatter(MASS_black_hole_mass,MASS_mass_primary,sz,MASS_roche_factor,'s','filled','HandleVisibility','off')
+    scatter(Gaia_BH1_black_hole_mass,Gaia_BH1_mass_primary,sz,Gaia_BH1_roche_factor,'>','filled','HandleVisibility','off')
+    scatter(Gaia_BH2_black_hole_mass,Gaia_BH2_mass_primary,sz,Gaia_BH2_roche_factor,'>','filled','HandleVisibility','off')
+    scatter(MASS_black_hole_mass,MASS_mass_primary,sz,MASS_roche_factor,'>','filled','HandleVisibility','off')
     
     cbar=colorbar;
     cbar.Label.String='$f_{\rm{RL}}=R/R_{\rm{RL}}$';
@@ -572,23 +572,23 @@ elseif choice==2
     cbar.Label.Interpreter = 'latex';
     colormap(sky);
     
-    saveas(gcf,strcat('../plots/pdf/Figure_App_roche_lobe_factor.pdf'))
-    saveas(gcf,strcat('../plots/png/Figure_App_roche_lobe_factor.png'))   
+    saveas(gcf,strcat('../plots/pdf/Figure_SM_roche_lobe_factor.pdf'))
+    saveas(gcf,strcat('../plots/png/Figure_SM_roche_lobe_factor.png'))   
 
 elseif choice==3
     % Orbital period
-    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_orbital_period_days,'^','filled','HandleVisibility','off')
-    scatter(VFTS243_mass_secondary_minimum,VFTS243_mass_primary_spectroscopic,5*sz,VFTS243_orbital_period_days,'^','filled','HandleVisibility','off')
-    scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,VFTS514_orbital_period_days,'^','filled','HandleVisibility','off')
-    scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,VFTS779_orbital_period_days,'^','filled','HandleVisibility','off')
+    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_orbital_period_days,'>','filled','HandleVisibility','off')
+    scatter(VFTS243_mass_secondary,VFTS243_mass_primary,szVFTS243,VFTS243_orbital_period_days,'>','filled','HandleVisibility','off')
+    scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,VFTS514_orbital_period_days,'>','filled','HandleVisibility','off')
+    scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,VFTS779_orbital_period_days,'>','filled','HandleVisibility','off')
     scatter(CygnusX1_black_hole_mass_median,CygnusX1_mass_primary_median,sz,CygnusX1_orbital_period_days,'o','filled','HandleVisibility','off')
     scatter(M33_X_7_black_hole_mass,M33_X_7_mass_primary_spectroscopic,sz,M33_X_7_orbital_period_days,'o','filled','HandleVisibility','off')
     scatter(HD96670_black_hole_mass,HD96670_mass_primary_spectroscopic,sz,HD96670_orbital_period_days,'o','filled','HandleVisibility','off')
     scatter(LMC_X_1_black_hole_mass,LMC_X_1_mass_primary,sz,LMC_X_1_orbital_period_days,'o','filled','HandleVisibility','off')
     scatter(SS_433_black_hole_mass,SS_433_mass_primary,sz,SS_433_orbital_period_days,'o','filled','HandleVisibility','off')
-    scatter(Gaia_BH1_black_hole_mass,Gaia_BH1_mass_primary,sz,Gaia_BH1_orbital_period_days,'hexagram','filled','HandleVisibility','off')
-    scatter(Gaia_BH2_black_hole_mass,Gaia_BH2_mass_primary,sz,Gaia_BH2_orbital_period_days,'hexagram','filled','HandleVisibility','off')
-    scatter(MASS_black_hole_mass,MASS_mass_primary,sz,MASS_orbital_period_days,'s','filled','HandleVisibility','off')
+    scatter(Gaia_BH1_black_hole_mass,Gaia_BH1_mass_primary,sz,Gaia_BH1_orbital_period_days,'>','filled','HandleVisibility','off')
+    scatter(Gaia_BH2_black_hole_mass,Gaia_BH2_mass_primary,sz,Gaia_BH2_orbital_period_days,'>','filled','HandleVisibility','off')
+    scatter(MASS_black_hole_mass,MASS_mass_primary,sz,MASS_orbital_period_days,'>','filled','HandleVisibility','off')
     
     cbar=colorbar;
     cbar.Label.Interpreter = 'latex';
@@ -600,8 +600,8 @@ elseif choice==3
     colormap(flip(pink));
     set(gca,'ColorScale','log')
     
-    saveas(gcf,strcat('../plots/pdf/Figure_App_orbital_period.pdf'))
-    saveas(gcf,strcat('../plots/png/Figure_App_orbital_period.png'))
+    saveas(gcf,strcat('../plots/pdf/Figure_SM_orbital_period.pdf'))
+    saveas(gcf,strcat('../plots/png/Figure_SM_orbital_period.png'))
 
 else
     display('Warning:odd choice.')

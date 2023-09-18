@@ -26,14 +26,14 @@ max_E_nu = max([max(max_E_nu_2_3) max(max_E_nu_2_7) max(max_E_nu_3_1) max(max_E_
 % v_nu_max        = round(20.0);
 v_nu_max        = round(91.56677272795208);
 
-v_nu_peak   = 3.0;
-v_nu_68     = 7.7;
-v_nu_95     = 27.9;
-v_nu_99     = 75.2;
+v_nu_peak   = 3.5;
+v_nu_68     = 8.0;
+v_nu_95     = 31.0;
+v_nu_99     = 65.0;
 
 % ANALYSIS
 % function [X,Y,alpha_solved] = get_asymmetry_parameter(M, M_protoNS, M_BH, debug_flag)
-[X,Y,alpha_solved] = get_asymmetry_parameter(9.0, min_E_nu, max_E_nu ,v_nu_max,debug_flag);
+[X,Y,alpha_solved] = get_asymmetry_parameter(10.0, min_E_nu, max_E_nu ,v_nu_max,debug_flag);
 
 if debug_flag
     display("Energy limits:")
