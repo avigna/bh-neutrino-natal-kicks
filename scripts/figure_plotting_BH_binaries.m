@@ -6,29 +6,23 @@ tic;
 % HD 130298
 % Mahy et al. (2022)
 % Orbital period 14.6 days
-% spectroscopicmass of 24.2±3.8Msun. 
-% The parameters predicted from BONN-SAI give an evolutionary mass of 28.0+5.2−4.1 Msun. 
-% With aminimum mass estimated to 7.7Msun for the secondary
 HD130298_mass_primary_spectroscopic         = 24.2;
 HD130298_mass_primary_spectroscopic_errors  = 3.8;
-HD130298_mass_primary_BONNSAI               = 28.0;
-HD130298_mass_primary_BONNSAI_error_plus    = 5.2;
-HD130298_mass_primary_BONNSAI_error_minus   = 4.1;
-HD130298_mass_secondary_minimum             = 7.7;
-HD130298_mass_secondary_minimum_error_plus  = 1.5;
-HD130298_mass_secondary_minimum_error_minus = 1.5;
+HD130298_mass_secondary                     = 8.9;
+HD130298_mass_secondary_error_plus          = 1.7;
+HD130298_mass_secondary_error_minus         = 2.2;
 HD130298_eccentricity                       = 0.457;
 
 HD130298_orbital_period_days        = 14.62959;
 HD130298_radius                     = 10.0;
-HD130298_effective_roche_radius     = calculateRocheRadius(HD130298_mass_primary_spectroscopic,HD130298_mass_secondary_minimum);
-HD130298_separation_Rsol            = calculate_separation_solar_radii_Kepler(HD130298_mass_primary_spectroscopic,HD130298_mass_secondary_minimum,HD130298_orbital_period_days);
+HD130298_effective_roche_radius     = calculateRocheRadius(HD130298_mass_primary_spectroscopic,HD130298_mass_secondary);
+HD130298_separation_Rsol            = calculate_separation_solar_radii_Kepler(HD130298_mass_primary_spectroscopic,HD130298_mass_secondary,HD130298_orbital_period_days);
 HD130298_roche_radius               = HD130298_effective_roche_radius.*HD130298_separation_Rsol;
 HD130298_roche_factor               = HD130298_radius/HD130298_roche_radius;
 
 if debug_flag
     display('HD130298')
-    HD130298_mass_secondary_minimum+HD130298_mass_primary_spectroscopic
+    HD130298_mass_secondary+HD130298_mass_primary_spectroscopic
     HD130298_eccentricity
     HD130298_roche_factor
 end
@@ -38,11 +32,6 @@ end
 % https://ui.adsabs.harvard.edu/abs/2022NatAs...6.1085S/abstract
 VFTS243_mass_primary                        = 25;
 VFTS243_mass_primary_errors                 = 2.3;
-VFTS243_mass_primary_spectroscopic          = 27;
-VFTS243_mass_primary_spectroscopic_errors   = 4;
-VFTS243_mass_primary_BONNSAI                = 26;
-VFTS243_mass_primary_BONNSAI_error_plus     = 2;
-VFTS243_mass_primary_BONNSAI_error_minus    = 2;
 VFTS243_mass_secondary                      = 10.1;
 VFTS243_mass_secondary_error_plus           = 2.0;
 VFTS243_mass_secondary_error_minus          = 2.0;
@@ -70,9 +59,6 @@ end
 % https://ui.adsabs.harvard.edu/abs/2022A%26A...665A.148S/abstract
 VFTS514_mass_primary_spectroscopic          = 19;
 VFTS514_mass_primary_spectroscopic_errors   = 3;
-VFTS514_mass_primary_BONNSAI                = 15;
-VFTS514_mass_primary_BONNSAI_error_plus     = 2;
-VFTS514_mass_primary_BONNSAI_error_minus    = 2;
 VFTS514_mass_secondary_minimum              = 4.5;
 VFTS514_mass_secondary_minimum_error_plus   = 0.5;
 VFTS514_mass_secondary_minimum_error_minus  = 0.5;
@@ -81,7 +67,7 @@ VFTS514_eccentricity_error_plus             = 0.019;
 VFTS514_eccentricity_error_minus            = 0.019;
 
 VFTS514_orbital_period_days        = 184.92;
-% VFTS514_radius                     = ;
+VFTS514_radius                     = [];
 % VFTS514_effective_roche_radius     = calculateRocheRadius(VFTS514_mass_primary_spectroscopic,VFTS514_mass_secondary_minimum);
 % VFTS514_separation_Rsol            = calculate_separation_solar_radii_Kepler(VFTS514_mass_primary_spectroscopic,VFTS514_mass_secondary_minimum,VFTS514_orbital_period_days);
 % VFTS514_roche_radius               = VFTS514_effective_roche_radius.*VFTS514_separation_Rsol;
@@ -102,9 +88,6 @@ end
 % https://ui.adsabs.harvard.edu/abs/2022A%26A...665A.148S/abstract
 VFTS779_mass_primary_spectroscopic          = 14;
 VFTS779_mass_primary_spectroscopic_errors   = 4;
-VFTS779_mass_primary_BONNSAI                = 12;
-VFTS779_mass_primary_BONNSAI_error_plus     = 3;
-VFTS779_mass_primary_BONNSAI_error_minus    = 2;
 VFTS779_mass_secondary_minimum              = 3.9;
 VFTS779_mass_secondary_minimum_error_plus   = 0.6;
 VFTS779_mass_secondary_minimum_error_minus  = 0.7;
@@ -124,15 +107,12 @@ end
 % Miller-Jones et al. (2022)
 % https://ui.adsabs.harvard.edu/abs/2021Sci...371.1046M/abstract
 CygnusX1_mass_primary_median                = 40.6;
-CygnusX1_mass_primary_mode                  = 39.8;
 CygnusX1_mass_primary_lower_bound           = 33.5;
 CygnusX1_mass_primary_upper_bound           = 48.3;
 CygnusX1_black_hole_mass_median             = 21.2;
-CygnusX1_black_hole_mass_mode               = 21.4;
 CygnusX1_black_hole_mass_lower_bound        = 18.9;
 CygnusX1_black_hole_mass_upper_bound        = 23.4;
 CygnusX1_eccentricity_median                = 0.0189;
-CygnusX1_eccentricity_mode                  = 0.0186;
 CygnusX1_eccentricity_lower_bound           = 0.0163;
 CygnusX1_eccentricity_upper_bound           = 0.0217;
 
@@ -178,16 +158,6 @@ end
 % HD 96670
 % Gomez & Grindlay (2021)
 % https://ui.adsabs.harvard.edu/abs/2021ApJ...913...48G/abstract
-% % Model 1
-% HD96670_mass_primary_spectroscopic              = 22.0;
-% HD96670_mass_primary_spectroscopic_error_plus   = 6.5;
-% HD96670_mass_primary_spectroscopic_error_minus  = 6.5;
-% HD96670_black_hole_mass                         = 4.6;
-% HD96670_black_hole_mass_error_plus              = 0.1;
-% HD96670_black_hole_mass_error_minus             = 0.1;
-% HD96670_eccentricity                            = 0.28;
-% HD96670_eccentricity_error_plus                 = 0.01;
-% HD96670_eccentricity_error_minus                = 0.01;
 % Model 2
 HD96670_mass_primary_spectroscopic              = 22.7;
 HD96670_mass_primary_spectroscopic_error_plus   = 5.2;
@@ -216,6 +186,7 @@ end
 % LMC X-1
 % https://ui.adsabs.harvard.edu/abs/2009ApJ...697..573O/abstract
 % https://iopscience.iop.org/article/10.1088/1538-3873/aa7407
+% https://ui.adsabs.harvard.edu/abs/2009ApJ...697..573O/abstract
 LMC_X_1_mass_primary                            = 30.62;
 LMC_X_1_mass_primary_error_plus                 = 3.17;
 LMC_X_1_mass_primary_error_minus                = 3.17;
@@ -226,8 +197,10 @@ LMC_X_1_black_hole_mass                         = 10.30;
 LMC_X_1_black_hole_mass_error_plus              = 1.18;
 LMC_X_1_black_hole_mass_error_minus             = 1.18;
 
-LMC_X_1_roche_factor                = 0.886;
-LMC_X_1_orbital_period_days         = 3.90917;
+LMC_X_1_roche_factor                            = 0.886;
+LMC_X_1_radius                                  = 17.0;
+LMC_X_1_orbital_period_days                     = 3.90917;
+
 
 if debug_flag
     display('LMC X-1')
@@ -250,7 +223,7 @@ SS_433_black_hole_mass_error_plus               = 0.4;
 SS_433_black_hole_mass_error_minus              = 0.4;
 
 SS_433_orbital_period_days        = 13.08;
-% SS_433_radius                     = [];
+SS_433_radius                     = [];
 % SS_433_effective_roche_radius     = calculateRocheRadius(SS_433_mass_primary,SS_433_black_hole_mass);
 % SS_433_separation_Rsol            = 58.3;
 % SS_433_roche_radius               = SS_433_effective_roche_radius.*SS_433_separation_Rsol
@@ -344,33 +317,6 @@ if debug_flag
     MASS_roche_factor
 end
 
-% % NGC1850 BH1 
-% % Saracino et al.
-% % https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.3162S/abstract
-% NGC1850_BH1_mass_primary                             = ;
-% NGC1850_BH1_mass_primary_error_plus                  = ;
-% NGC1850_BH1_mass_primary_error_minus                 = ;
-% NGC1850_BH1_eccentricity                             = 0.029;
-% NGC1850_BH1_eccentricity_error_plus                  = 0.010;
-% NGC1850_BH1_eccentricity_error_minus                 = 0.014;
-% NGC1850_BH1_black_hole_mass                          = 3.0;
-% NGC1850_BH1_black_hole_mass_error_plus               = ;
-% NGC1850_BH1_black_hole_mass_error_minus              = ;
-% 
-% NGC1850_BH1_orbital_period_days        = 5.0402; % ± 0.0004
-% NGC1850_BH1_radius                     = ;
-% NGC1850_BH1_effective_roche_radius     = calculateRocheRadius(NGC1850_BH1_mass_primary,NGC1850_BH1_black_hole_mass);
-% NGC1850_BH1_separation_Rsol            = calculate_separation_solar_radii_Kepler(NGC1850_BH1_mass_primary,NGC1850_BH1_black_hole_mass,NGC1850_BH1_orbital_period_days);
-% NGC1850_BH1_roche_radius               = NGC1850_BH1_effective_roche_radius.*NGC1850_BH1_separation_Rsol;
-% NGC1850_BH1_roche_factor               = NGC1850_BH1_radius/NGC1850_BH1_roche_radius;
-% 
-% if debug_flag
-%     display('NGC1850 BH1')
-%     NGC1850_BH1_black_hole_mass+NGC1850_BH1_mass_primary
-%     NGC1850_BH1_eccentricity
-%     NGC1850_BH1_roche_factor
-% end
-
 % PLOT
 sz=125;
 sz2=10;
@@ -407,12 +353,12 @@ legend( 'HMXB','Inert BHB',...
         'Interpreter','latex')
 
 % HD130298
-errorbar(   HD130298_mass_secondary_minimum,...
+errorbar(   HD130298_mass_secondary,...
             HD130298_mass_primary_spectroscopic,...
             HD130298_mass_primary_spectroscopic_errors,...
             HD130298_mass_primary_spectroscopic_errors,...
-            HD130298_mass_secondary_minimum_error_minus,...
-            HD130298_mass_secondary_minimum_error_plus,'k','HandleVisibility','off')
+            HD130298_mass_secondary_error_minus,...
+            HD130298_mass_secondary_error_plus,'k','HandleVisibility','off')
 text(7.5,19,'HD130298',FontSize=fs2);
 
 % VFTS243
@@ -523,7 +469,7 @@ choice = menu(msg,opts);
 
 if choice == 1
     % Eccentricity
-    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_eccentricity,'>','filled','HandleVisibility','off')
+    scatter(HD130298_mass_secondary,HD130298_mass_primary_spectroscopic,sz,HD130298_eccentricity,'>','filled','HandleVisibility','off')
     scatter(VFTS243_mass_secondary,VFTS243_mass_primary,szVFTS243,VFTS243_eccentricity,'>','filled','HandleVisibility','off')
     scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,VFTS514_eccentricity,'>','filled','HandleVisibility','off')
     scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,VFTS779_eccentricity,'>','filled','HandleVisibility','off')
@@ -553,7 +499,7 @@ if choice == 1
 
 elseif choice==2
     % Roche-filling factor
-    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_roche_factor,'>','filled','HandleVisibility','off')
+    scatter(HD130298_mass_secondary,HD130298_mass_primary_spectroscopic,sz,HD130298_roche_factor,'>','filled','HandleVisibility','off')
     scatter(VFTS243_mass_secondary,VFTS243_mass_primary,szVFTS243,VFTS243_roche_factor,'>','filled','HandleVisibility','off')
     scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,grey,'>','filled','HandleVisibility','off')
     scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,grey,'>','filled','HandleVisibility','off')
@@ -577,7 +523,7 @@ elseif choice==2
 
 elseif choice==3
     % Orbital period
-    scatter(HD130298_mass_secondary_minimum,HD130298_mass_primary_spectroscopic,sz,HD130298_orbital_period_days,'>','filled','HandleVisibility','off')
+    scatter(HD130298_mass_secondary,HD130298_mass_primary_spectroscopic,sz,HD130298_orbital_period_days,'>','filled','HandleVisibility','off')
     scatter(VFTS243_mass_secondary,VFTS243_mass_primary,szVFTS243,VFTS243_orbital_period_days,'>','filled','HandleVisibility','off')
     scatter(VFTS514_mass_secondary_minimum,VFTS514_mass_primary_spectroscopic,sz,VFTS514_orbital_period_days,'>','filled','HandleVisibility','off')
     scatter(VFTS779_mass_secondary_minimum,VFTS779_mass_primary_spectroscopic,sz,VFTS779_orbital_period_days,'>','filled','HandleVisibility','off')
