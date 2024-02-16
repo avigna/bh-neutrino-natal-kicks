@@ -1,7 +1,8 @@
 function referee_report_calculate_tidal_timescale_at_RLOF(print_flag)
 tic;
 
-% Estimate of the e-folding circularization timescale from energy dissipation via the dynamical tide.
+% Function to estimate of the e-folding circularization timescale from 
+% energy dissipation via the dynamical tide.
 % Based on Hurley et al. (2002)
 % link: https://ui.adsabs.harvard.edu/abs/2002MNRAS.329..897H/abstract
 E2 = @(M) (1.592*10^-9)*M.^(2.84); % Eq. 43 from Hurley et al. (2002)

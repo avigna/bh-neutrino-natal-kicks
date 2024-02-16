@@ -1,4 +1,4 @@
-function neutrino_emission_asymmetry_analysis_energy(save_flag,print_flag)
+function figure_S4_neutrino_emission_asymmetry_analysis_energy(save_flag,print_flag)
 tic;
 % Function to create Fig. S4 from Vigna-Gómez et al. (arXiv:2310.01509)
 % link: https://ui.adsabs.harvard.edu/abs/2023arXiv231001509V/abstract
@@ -8,7 +8,7 @@ tic;
 % DATA
 % From Kresse, Ertl & Janka (2021)
 % link: https://ui.adsabs.harvard.edu/abs/2021ApJ...909..169K/abstract
-% data: https://wwwmpa.mpa-garching.mpg.de/ccsnarchive/
+% Request accest to data: https://wwwmpa.mpa-garching.mpg.de/ccsnarchive/
 M_2_3 = readmatrix('../data/Kresse2021/W18-BH2.3_He.txt','NumHeaderLines',16);
 M_2_7 = readmatrix('../data/Kresse2021/W18-BH2.7_He.txt','NumHeaderLines',16);
 M_3_1 = readmatrix('../data/Kresse2021/W18-BH3.1_He.txt','NumHeaderLines',16);
@@ -34,6 +34,7 @@ v_nu_99     = 47.0;
 chosen_mass_Msun = 10.0;
 [X,Y,alpha_solved] = get_asymmetry_parameter(chosen_mass_Msun, min_E_nu, max_E_nu ,v_nu_max,print_flag);
 
+% PRINT
 if print_flag
     disp("Energy limits:")
     round(min_E_nu,1)
