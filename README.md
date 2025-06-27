@@ -10,7 +10,7 @@ For additional details we refer to the manuscript, its Supplemental Material, an
 The anaylsis on the natal kick (Fig. 1, S1 and S3) was performed using the [natal kick](https://github.com/reinhold-willcox/BH_neutrinos) repository from Reinhold Willcox.
 
 ## Contact
-Please email your queries to Alejandro Vigna-Gómez (avigna@mpa-garching.mpg.de).
+Please email your queries to Alejandro Vigna-Gómez (alejandro.vigna.astro@gmail.com).
 
 ## Acknowledgements
 If you use any scripts in this repo for results presented in a scientific publication, please cite:
